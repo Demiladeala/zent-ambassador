@@ -21,6 +21,11 @@ const proximaNova = localFont({
       weight: "700",
       style: "normal",
     },
+    {
+      path: "./ProximaNovaA-Extrabld.woff2",
+      weight: "800",
+      style: "normal",
+    },
   ],
   variable: "--font-proximaNova",
 });
@@ -59,6 +64,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body
+        suppressHydrationWarning
         className={`${proximaNova.className} 
        font-proximaNova bg-white antialiased`}
       >

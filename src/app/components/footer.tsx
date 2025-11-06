@@ -195,7 +195,7 @@ const Footer = () => {
                 lg:flex items-center justify-center lg:w-full"
           >
             <div className="w-fit max-lg:mx-auto whitespace-nowrap">
-              <p className="text-center text-[#7D7D7D]">
+              <p className="text-center text-[#7D7D7D] max-sm:text-xs">
                 © {date} Zent Technologies &nbsp; All Rights Reserved
               </p>
             </div>
