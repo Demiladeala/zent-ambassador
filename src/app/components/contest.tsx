@@ -62,13 +62,14 @@ const steps: CarouselStep[] = [
   {
     id: 3,
     title: "Winner selection",
-    description: "Scoring criteria: ",
+    description: "Judging will be based on: ",
     description4:
       "We'll collect data, score transparently, and announce winners.",
     details: [
-      "50% Engagement (views, comments, likes, shares)",
-      "20% Reach (followers engaged)",
-      "30% Content Quality & Clarity & Brand Fit",
+      "Creativity and originality of the video.",
+      "Engagement (5 vendors onboard, No of onboarded businesses that subscribe through you)",
+      "Alignment with Zent's values and messaging.",
+      "The winner will be announced on February 28, 2026.",
     ],
     borderColor: "border-[#009BDF33]",
     bgColor: "bg-[#F0FBFF80]",
@@ -184,12 +185,20 @@ export function Contest() {
                 <div
                   key={step.id}
                   onClick={() => handleStepClick(index)}
-                  className="absolute transition-all duration-500 ease-out"
+                  className="z-5 absolute transition-all duration-500 ease-out cursor-pointer"
                   style={{
                     transform: `translate(calc(-25% + ${x}px), calc(-20% + ${y}px))`,
                   }}
                 >
                   <div
+                    style={
+                      isActive
+                        ? {
+                            boxShadow: "0px 0px 34px 2px #3E24F629",
+                            backdropFilter: "blur(6px)",
+                          }
+                        : {}
+                    }
                     className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 cursor-pointer ${
                       isActive
                         ? "bg-black text-white border-4 border-white shadow-lg scale-110"
