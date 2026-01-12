@@ -31,9 +31,9 @@ const proximaNova = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Build Your Online Store in Minutes ",
-  description: `Create your online store with Zent in minutes. Easy, fast, 
-  and affordable e-commerce solutions. Start now! `,
+  title: "Earn up to ₦500k+ per month as a ZentAmbassador",
+  description: `Officially become Zent Ambassadors, with earning potential of
+₦500,000+ monthly.`,
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="apple-touch-icon"
