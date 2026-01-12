@@ -85,11 +85,19 @@ export function Contest() {
     if (!isAutoplay) return;
 
     const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % steps.length);
+      setActiveStep((prev) => prev + 1);
     }, 4000);
 
     return () => clearInterval(interval);
   }, [isAutoplay]);
+
+  useEffect(() => {
+    const maxIndex = steps.length * 2;
+
+    if (activeStep >= maxIndex) {
+      setActiveStep(steps.length);
+    }
+  }, [activeStep]);
 
   const handleStepClick = (index: number) => {
     setActiveStep(index);
@@ -107,7 +115,7 @@ export function Contest() {
   // Calculate positions for anti-clockwise circular layout
   const getStepPosition = (index: number) => {
     const totalSteps = steps.length;
-    const baseOffset = activeStep;
+    const baseOffset = activeStep % totalSteps;
     const adjustedIndex = (index - baseOffset + totalSteps) % totalSteps;
 
     const angles = {
@@ -124,6 +132,10 @@ export function Contest() {
 
     return { x, y, isActive: adjustedIndex === 0 };
   };
+
+  const LOOP_COUNT = 3;
+
+  const repeatedSteps = Array.from({ length: LOOP_COUNT }, () => steps).flat();
 
   return (
     <div className="w-full relative px-4 py-12 md:py-16 lg:py-20">
@@ -213,16 +225,20 @@ export function Contest() {
           </button>
 
           {/* Content Card */}
-          <div className="relative w-full overflow-hidden">
+          <div
+            className="relative w-full overflow-hidden"
+            onMouseEnter={() => setIsAutoplay(false)}
+            onMouseLeave={() => setIsAutoplay(true)}
+          >
             <div
               className="flex gap-5 transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${activeStep * 75}%)` }}
             >
-              {steps.map((step, index) => (
+              {repeatedSteps.map((step, index) => (
                 <div
-                  key={step.id}
+                  key={index}
                   className={`rounded-2xl p-8 cursor-pointer transition-all duration-300
-                    ${step.id === 3 ? "min-w-[95%]" : "min-w-[75%]"}
+                    ${step.id === 3 ? "min-w-[75%]" : "min-w-[75%]"}
         ${step.bgColor} border ${step.borderColor}`}
                   onClick={() => handleStepClick(index)}
                 >
