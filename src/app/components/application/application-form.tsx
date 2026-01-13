@@ -136,9 +136,14 @@ export function ApplicationForm() {
         );
       }
 
-      await response.json();
+      const result = await response.json();
 
-      toast.success("Application submitted successfully 🎉");
+      if (!response.ok) {
+        toast.error(result?.message || "Submission failed. Please try again.");
+        return;
+      }
+
+      toast.success("Application submitted successfully");
       router.push("/application/thank-you");
     } catch {
       toast.error("Something went wrong. Please try again.");
