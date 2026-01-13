@@ -122,12 +122,12 @@ export function ApplicationForm() {
         payload.append("proof", proofFile);
 
         response = await fetch(
-          "https://api.zentstores.com/api/v1/ambassador/applications/submit/",
+          "https://zent-backend-app-18c581b169a0.herokuapp.com/api/v1/ambassador/applications/submit/",
           { method: "POST", body: payload }
         );
       } else {
         response = await fetch(
-          "https://api.zentstores.com/api/v1/ambassador/applications/submit/",
+          "https://zent-backend-app-18c581b169a0.herokuapp.com/api/v1/ambassador/applications/submit/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
