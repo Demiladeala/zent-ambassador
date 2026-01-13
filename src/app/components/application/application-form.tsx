@@ -8,7 +8,7 @@ import { ChevronDown, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
 
 type ApplicationFormData = z.infer<typeof applicationSchema>;
@@ -152,6 +152,7 @@ export function ApplicationForm() {
 
   return (
     <section className="relative bg-white py-8 lg:py-16 px-4">
+      <Toaster />
       <div className="max-w-2xl mx-auto">
         <div className="">
           {/* Form Column */}
