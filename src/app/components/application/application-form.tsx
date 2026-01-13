@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
+import { CldUploadWidget } from "next-cloudinary";
+import { Trash2Icon } from "lucide-react";
 
 type ApplicationFormData = z.infer<typeof applicationSchema>;
 type CountryCode = {
@@ -32,6 +34,7 @@ export const applicationSchema = z.object({
   email: z.string().email("Enter a valid email"),
   countryCode: z.string().min(1),
   phone: z.string().min(5, "Phone number is required"),
+  proof: z.string().url().optional(),
   community_size: z.string().min(1, "Community size is required"),
   mission_and_target_audience: z.string().min(1, "This field is required"),
   social_platforms: z.array(z.string()).min(1, "Select at least one platform"),
@@ -61,6 +64,7 @@ export const applicationSchema = z.object({
 
 export function ApplicationForm() {
   const [countryCodes, setCountryCodes] = useState<CountryCode[]>([]);
+  const [proofUrl, setProofUrl] = useState<string>("");
 
   useEffect(() => {
     async function loadCodes() {
@@ -100,46 +104,29 @@ export function ApplicationForm() {
     },
   });
 
-  const [proofFile, setProofFile] = useState<File | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
   const onSubmit = async (values: ApplicationFormData) => {
     const phone = `${values.countryCode}${values.phone}`;
 
     try {
-      let response: any;
-
-      if (proofFile) {
-        const payload = new FormData();
-        Object.entries(values).forEach(([key, value]) => {
-          if (Array.isArray(value)) {
-            payload.append(key, JSON.stringify(value));
-          } else {
-            payload.append(key, String(value));
-          }
-        });
-        payload.append("phone", phone);
-        payload.append("proof", proofFile);
-
-        response = await fetch(
-          "https://zent-backend-app-18c581b169a0.herokuapp.com/api/v1/ambassador/applications/submit/",
-          { method: "POST", body: payload }
-        );
-      } else {
-        response = await fetch(
-          "https://zent-backend-app-18c581b169a0.herokuapp.com/api/v1/ambassador/applications/submit/",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...values, phone }),
-          }
-        );
-      }
+      const response = await fetch(
+        "https://zent-backend-app-18c581b169a0.herokuapp.com/api/v1/ambassador/applications/submit/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...values,
+            phone,
+            proof: proofUrl || undefined,
+          }),
+        }
+      );
 
       const result = await response.json();
 
       if (!response.ok) {
-        toast.error(result?.message || "Submission failed. Please try again.");
+        toast.error(result?.message || "Submission failed");
         return;
       }
 
@@ -420,39 +407,62 @@ export function ApplicationForm() {
                     Upload proof{" "}
                     <span className="text-gray-500">(Optional)</span>
                   </label>
-                  <div className="flex items-center border-2 border-[#EEEBFC] rounded-lg p-2 gap-2">
-                    <input
-                      style={{
-                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                  {!proofUrl ? (
+                    <CldUploadWidget
+                      uploadPreset="zent-seller-store-setup-onboarding"
+                      options={{
+                        clientAllowedFormats: ["pdf", "jpg", "jpeg", "png"],
+                        maxFileSize: 5000000,
+                        multiple: false,
+                        sources: ["local", "url", "google_drive", "dropbox"],
                       }}
-                      ref={fileInputRef}
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      type="file"
-                      className="hidden"
-                      onChange={(e) => {
-                        if (e.target.files?.[0]) {
-                          setProofFile(e.target.files[0]);
+                      onSuccess={(result: any) => {
+                        if (result?.info?.secure_url) {
+                          setProofUrl(result.info.secure_url);
+                          setValue("proof", result.info.secure_url, {
+                            shouldValidate: true,
+                          });
                         }
                       }}
-                    />
-                    <input
-                      style={{
-                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                      onError={() => {
+                        toast.error("Failed to upload proof");
                       }}
-                      type="text"
-                      placeholder=" Upload proof (optional)"
-                      value={proofFile?.name || ""}
-                      readOnly
-                      className="max-lg:w-[60%] flex-1 px-4 border-0 focus:outline-none rounded-lg bg-white text-gray-600"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="shrink-0 px-4 py-[3px] border-2 border-[#EEEBFC] rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium"
                     >
-                      Choose file
-                    </button>
-                  </div>
+                      {({ open }) => (
+                        <button
+                          type="button"
+                          onClick={() => open()}
+                          className="w-full px-4 py-2 flex items-center justify-between border-2 border-[#EEEBFC] rounded-lg bg-white"
+                        >
+                          <p className="text-gray-500">
+                            Upload proof (optional)
+                          </p>
+
+                          <button
+                            type="button"
+                            className="shrink-0 px-4 py-[3px] border-2 border-[#EEEBFC] rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium"
+                          >
+                            {" "}
+                            Choose file{" "}
+                          </button>
+                        </button>
+                      )}
+                    </CldUploadWidget>
+                  ) : (
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm text-green-600">Uploaded ✓</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setProofUrl("");
+                          setValue("proof", undefined);
+                        }}
+                        className="text-red-600"
+                      >
+                        <Trash2Icon size={18} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
               {/* Post Collaborations */}
