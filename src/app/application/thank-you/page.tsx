@@ -15,7 +15,7 @@ export default function ThankyouPage() {
       <Link href="/">
         <button
           type="button"
-          className="w-fit py-2 px-3 bg-black text-white flex items-center justify-center text-base hover:bg-gray-900 transition border border-black rounded-xl"
+          className="w-fit py-2 px-8 bg-black text-white flex items-center justify-center text-base hover:bg-gray-900 transition border border-black rounded-xl"
         >
           Home
         </button>
