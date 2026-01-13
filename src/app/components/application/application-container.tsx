@@ -4,7 +4,7 @@ import { ApplicationForm } from "./application-form";
 
 export function ApplicationContainer() {
   return (
-    <div className="max-w-[3500px] mx-auto overflow-x-hidden">
+    <div className="max-w-[3500px] mx-auto overflow-x-hidden overflow-y-auto">
       <ApplicationForm />
       <BusinessToolKit />
     </div>

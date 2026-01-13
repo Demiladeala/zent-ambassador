@@ -138,419 +138,425 @@ export function ApplicationForm() {
   };
 
   return (
-    <section className="relative bg-white py-8 lg:py-16 px-4">
+    <div>
       <Toaster />
-      <div className="max-w-2xl mx-auto">
-        <div className="">
-          {/* Form Column */}
-          <div className="md:col-span-2">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-semibold text-center mb-4">
-                Application Form
-              </h1>
-              <p className="text-gray-600 mb-8 text-center lg:w-[80%] mx-auto">
-                Note: Limited slots available. Don't miss out on this chance to
-                grow your income and influence while making impact.
-              </p>
-            </div>
+      <section className="relative bg-white py-8 lg:py-16 px-4 overflow-y-auto">
+        <div className="max-w-2xl mx-auto">
+          <div className="">
+            {/* Form Column */}
+            <div className="md:col-span-2">
+              <div>
+                <h1 className="text-4xl md:text-5xl font-semibold text-center mb-4">
+                  Application Form
+                </h1>
+                <p className="text-gray-600 mb-8 text-center lg:w-[80%] mx-auto">
+                  Note: Limited slots available. Don't miss out on this chance
+                  to grow your income and influence while making impact.
+                </p>
+              </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* First and Last Name Row */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="first_name"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    First name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    style={{
-                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                    }}
-                    {...register("first_name")}
-                    placeholder="First name"
-                    className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* First and Last Name Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor="first_name"
+                      className="block text-sm font-medium mb-2"
+                    >
+                      First name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      style={{
+                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                      }}
+                      {...register("first_name")}
+                      placeholder="First name"
+                      className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
     ${
       errors.first_name ? "border border-red-500" : "border-2 border-[#EEEBFC]"
     }`}
-                  />
-                  {errors.first_name && (
-                    <p className="text-sm text-red-500 mt-1">
-                      {errors.first_name.message}
-                    </p>
-                  )}
+                    />
+                    {errors.first_name && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.first_name.message}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="last_name"
+                      className="block text-sm font-medium mb-2"
+                    >
+                      Last name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      style={{
+                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                      }}
+                      {...register("last_name")}
+                      placeholder="Last name"
+                      className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
+    ${
+      errors.last_name ? "border border-red-500" : "border-2 border-[#EEEBFC]"
+    }`}
+                    />
+                    {errors.last_name && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.last_name.message}
+                      </p>
+                    )}
+                  </div>
                 </div>
+                {/* Email */}
                 <div>
                   <label
-                    htmlFor="last_name"
+                    htmlFor="email"
                     className="block text-sm font-medium mb-2"
                   >
-                    Last name <span className="text-red-500">*</span>
+                    Your email address <span className="text-red-500">*</span>
                   </label>
                   <input
                     style={{
                       boxShadow: "0px 0px 4px 1px #4A62FF0F",
                     }}
-                    {...register("last_name")}
-                    placeholder="Last name"
+                    {...register("email")}
+                    placeholder="Enter email address"
                     className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
-    ${
-      errors.last_name ? "border border-red-500" : "border-2 border-[#EEEBFC]"
-    }`}
-                  />
-                  {errors.last_name && (
-                    <p className="text-sm text-red-500 mt-1">
-                      {errors.last_name.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                >
-                  Your email address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  style={{
-                    boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                  }}
-                  {...register("email")}
-                  placeholder="Enter email address"
-                  className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
     ${errors.email ? "border border-red-500" : "border-2 border-[#EEEBFC]"}`}
-                />
-                {errors.email && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-              {/* Phone Number */}
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium mb-2"
-                >
-                  Your phone number <span className="text-red-500">*</span>
-                </label>
-                <div className="flex gap-2">
-                  <div className="relative">
-                    <select
-                      {...register("countryCode")}
-                      // className="px-4 py-3 border-2 border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none pr-8"
-                      className="max-w-44 appearance-none px-4 py-3 border-2 rounded-lg bg-white"
-                    >
-                      {countryCodes.map((c, index) => (
-                        <option key={index} value={c.code}>
-                          {c.name} ({c.code})
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute right-2 top-3.5 w-4 h-4 pointer-events-none text-gray-600" />
-                  </div>
-                  <input
-                    style={{
-                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                    }}
-                    {...register("phone")}
-                    placeholder="Enter phone number"
-                    className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
-    ${errors.phone ? "border border-red-500" : "border-2 border-[#EEEBFC]"}`}
                   />
-                </div>
-                {errors.phone && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.phone.message}
-                  </p>
-                )}
-              </div>
-              {/* Community Size */}
-              <div>
-                <label
-                  htmlFor="community_size"
-                  className="block text-sm font-medium mb-2"
-                >
-                  Community size (Followers/members){" "}
-                  <span className="text-red-500">*</span>
-                </label>
-                <input
-                  style={{
-                    boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                  }}
-                  {...register("community_size")}
-                  placeholder="e.g 10,000"
-                  className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
-    ${
-      errors.community_size
-        ? "border border-red-500"
-        : "border-2 border-[#EEEBFC]"
-    }`}
-                />
-                {errors.community_size && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.community_size.message}
-                  </p>
-                )}
-              </div>
-              {/* Mission & Target Audience */}
-              <div>
-                <label
-                  htmlFor="mission_and_target_audience"
-                  className="block text-sm font-medium mb-2"
-                >
-                  Mission & target audience{" "}
-                  <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  style={{
-                    boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                  }}
-                  {...register("mission_and_target_audience")}
-                  placeholder="Enter response"
-                  rows={4}
-                  className="resize-none w-full px-4 py-3 placeholder:text-[#7D7D7D] border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                />
-                {errors.mission_and_target_audience && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.mission_and_target_audience.message}
-                  </p>
-                )}
-              </div>
-              {/* Social Media Platforms */}
-              <div>
-                <label className="block text-sm font-medium mb-3">
-                  Social media platforms <span className="text-red-500">*</span>
-                </label>
-                <div className="flex flex-wrap gap-3">
-                  {SOCIAL_PLATFORMS.map((platform) => {
-                    const selected = watch("social_platforms");
-
-                    return (
-                      <label
-                        key={platform.id}
-                        className="flex items-center gap-2"
-                      >
-                        <input
-                          style={{
-                            boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                          }}
-                          type="checkbox"
-                          className="accent-black"
-                          checked={selected.includes(platform.id)}
-                          onChange={(e) => {
-                            setValue(
-                              "social_platforms",
-                              e.target.checked
-                                ? [...selected, platform.id]
-                                : selected.filter(
-                                    (p: string) => p !== platform.id
-                                  ),
-                              { shouldValidate: true }
-                            );
-                          }}
-                        />
-                        <span>{platform.label}</span>
-                      </label>
-                    );
-                  })}
-
-                  {errors.social_platforms && (
-                    <p className="text-sm text-red-500">
-                      {errors.social_platforms.message}
+                  {errors.email && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.email.message}
                     </p>
                   )}
                 </div>
-              </div>
-              <div className="flex flex-col lg:flex-row gap-2">
-                {/* Engagement Rate */}
-                <div className="w-full lg:basis-[40%]">
+                {/* Phone Number */}
+                <div>
                   <label
-                    htmlFor="average_engagement_rate"
+                    htmlFor="phone"
                     className="block text-sm font-medium mb-2"
                   >
-                    Average engagement rate{" "}
+                    Your phone number <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex gap-2">
+                    <div className="relative">
+                      <select
+                        {...register("countryCode")}
+                        // className="px-4 py-3 border-2 border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none pr-8"
+                        className="max-w-44 appearance-none px-4 py-3 border-2 rounded-lg bg-white"
+                      >
+                        {countryCodes.map((c, index) => (
+                          <option key={index} value={c.code}>
+                            {c.name} ({c.code})
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="absolute right-2 top-3.5 w-4 h-4 pointer-events-none text-gray-600" />
+                    </div>
+                    <input
+                      style={{
+                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                      }}
+                      {...register("phone")}
+                      placeholder="Enter phone number"
+                      className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
+    ${errors.phone ? "border border-red-500" : "border-2 border-[#EEEBFC]"}`}
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.phone.message}
+                    </p>
+                  )}
+                </div>
+                {/* Community Size */}
+                <div>
+                  <label
+                    htmlFor="community_size"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    Community size (Followers/members){" "}
                     <span className="text-red-500">*</span>
                   </label>
                   <input
                     style={{
                       boxShadow: "0px 0px 4px 1px #4A62FF0F",
                     }}
-                    type="number"
-                    step="0.01"
-                    min={0}
-                    max={100}
-                    {...register("average_engagement_rate", {
-                      valueAsNumber: true,
-                    })}
-                    placeholder="Enter average rate (%)"
+                    {...register("community_size")}
+                    placeholder="e.g 10,000"
                     className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
+    ${
+      errors.community_size
+        ? "border border-red-500"
+        : "border-2 border-[#EEEBFC]"
+    }`}
+                  />
+                  {errors.community_size && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.community_size.message}
+                    </p>
+                  )}
+                </div>
+                {/* Mission & Target Audience */}
+                <div>
+                  <label
+                    htmlFor="mission_and_target_audience"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    Mission & target audience{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    style={{
+                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                    }}
+                    {...register("mission_and_target_audience")}
+                    placeholder="Enter response"
+                    rows={4}
+                    className="resize-none w-full px-4 py-3 placeholder:text-[#7D7D7D] border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  />
+                  {errors.mission_and_target_audience && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.mission_and_target_audience.message}
+                    </p>
+                  )}
+                </div>
+                {/* Social Media Platforms */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">
+                    Social media platforms{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex flex-wrap gap-3">
+                    {SOCIAL_PLATFORMS.map((platform) => {
+                      const selected = watch("social_platforms");
+
+                      return (
+                        <label
+                          key={platform.id}
+                          className="flex items-center gap-2"
+                        >
+                          <input
+                            style={{
+                              boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                            }}
+                            type="checkbox"
+                            className="accent-black"
+                            checked={selected.includes(platform.id)}
+                            onChange={(e) => {
+                              setValue(
+                                "social_platforms",
+                                e.target.checked
+                                  ? [...selected, platform.id]
+                                  : selected.filter(
+                                      (p: string) => p !== platform.id
+                                    ),
+                                { shouldValidate: true }
+                              );
+                            }}
+                          />
+                          <span>{platform.label}</span>
+                        </label>
+                      );
+                    })}
+
+                    {errors.social_platforms && (
+                      <p className="text-sm text-red-500">
+                        {errors.social_platforms.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col lg:flex-row gap-2">
+                  {/* Engagement Rate */}
+                  <div className="w-full lg:basis-[40%]">
+                    <label
+                      htmlFor="average_engagement_rate"
+                      className="block text-sm font-medium mb-2"
+                    >
+                      Average engagement rate{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      style={{
+                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                      }}
+                      type="number"
+                      step="0.01"
+                      min={0}
+                      max={100}
+                      {...register("average_engagement_rate", {
+                        valueAsNumber: true,
+                      })}
+                      placeholder="Enter average rate (%)"
+                      className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
                       [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
     ${
       errors.average_engagement_rate
         ? "border border-red-500"
         : "border-2 border-[#EEEBFC]"
     }`}
+                    />
+                    {errors.average_engagement_rate && (
+                      <p className="text-sm text-red-500 mt-1">
+                        {errors.average_engagement_rate.message}
+                      </p>
+                    )}
+                  </div>
+                  {/* File Upload */}
+                  <div className="w-full lg:basis-[60%] ">
+                    <label className="block text-sm font-medium mb-2">
+                      Upload proof{" "}
+                      <span className="text-gray-500">(Optional)</span>
+                    </label>
+                    {!proofUrl ? (
+                      <CldUploadWidget
+                        uploadPreset="zent-seller-store-setup-onboarding"
+                        options={{
+                          clientAllowedFormats: ["pdf", "jpg", "jpeg", "png"],
+                          maxFileSize: 5000000,
+                          multiple: false,
+                          sources: ["local", "url", "google_drive", "dropbox"],
+                        }}
+                        onSuccess={(result: any) => {
+                          if (result?.info?.secure_url) {
+                            setProofUrl(result.info.secure_url);
+                            setValue("proof", result.info.secure_url, {
+                              shouldValidate: true,
+                            });
+                          }
+                        }}
+                        onError={() => {
+                          toast.error("Failed to upload proof");
+                        }}
+                      >
+                        {({ open }) => (
+                          <button
+                            type="button"
+                            onClick={() => open()}
+                            className="w-full px-4 py-2 flex items-center justify-between border-2 border-[#EEEBFC] rounded-lg bg-white"
+                          >
+                            <p className="text-gray-500">
+                              Upload proof (optional)
+                            </p>
+
+                            <button
+                              type="button"
+                              className="shrink-0 px-4 py-[3px] border-2 border-[#EEEBFC] rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium"
+                            >
+                              {" "}
+                              Choose file{" "}
+                            </button>
+                          </button>
+                        )}
+                      </CldUploadWidget>
+                    ) : (
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm text-green-600">
+                          Uploaded ✓
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setProofUrl("");
+                            setValue("proof", undefined);
+                          }}
+                          className="text-red-600"
+                        >
+                          <Trash2Icon size={18} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Post Collaborations */}
+                <div>
+                  <label
+                    htmlFor="past_collaborations_or_partnerships"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    Post collaborations or Partnerships{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    style={{
+                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                    }}
+                    {...register("past_collaborations_or_partnerships")}
+                    placeholder="Describe previous campaigns/brands worked with"
+                    rows={4}
+                    className="resize-none w-full px-4 py-3 placeholder:text-[#7D7D7D] border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                   />
-                  {errors.average_engagement_rate && (
+                  {errors.past_collaborations_or_partnerships && (
                     <p className="text-sm text-red-500 mt-1">
-                      {errors.average_engagement_rate.message}
+                      {errors.past_collaborations_or_partnerships.message}
                     </p>
                   )}
                 </div>
-                {/* File Upload */}
-                <div className="w-full lg:basis-[60%] ">
-                  <label className="block text-sm font-medium mb-2">
-                    Upload proof{" "}
-                    <span className="text-gray-500">(Optional)</span>
+                {/* Agreement & Compliance */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium">
+                    Agreement & Compliance{" "}
+                    <span className="text-red-500">*</span>
                   </label>
-                  {!proofUrl ? (
-                    <CldUploadWidget
-                      uploadPreset="zent-seller-store-setup-onboarding"
-                      options={{
-                        clientAllowedFormats: ["pdf", "jpg", "jpeg", "png"],
-                        maxFileSize: 5000000,
-                        multiple: false,
-                        sources: ["local", "url", "google_drive", "dropbox"],
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      style={{
+                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
                       }}
-                      onSuccess={(result: any) => {
-                        if (result?.info?.secure_url) {
-                          setProofUrl(result.info.secure_url);
-                          setValue("proof", result.info.secure_url, {
-                            shouldValidate: true,
-                          });
-                        }
-                      }}
-                      onError={() => {
-                        toast.error("Failed to upload proof");
-                      }}
-                    >
-                      {({ open }) => (
-                        <button
-                          type="button"
-                          onClick={() => open()}
-                          className="w-full px-4 py-2 flex items-center justify-between border-2 border-[#EEEBFC] rounded-lg bg-white"
-                        >
-                          <p className="text-gray-500">
-                            Upload proof (optional)
-                          </p>
+                      {...register("agree_to_post_zent")}
+                      className="accent-black w-4 h-4 mt-1 rounded border-gray-300 text-black focus:ring-black"
+                    />
 
-                          <button
-                            type="button"
-                            className="shrink-0 px-4 py-[3px] border-2 border-[#EEEBFC] rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium"
-                          >
-                            {" "}
-                            Choose file{" "}
-                          </button>
-                        </button>
-                      )}
-                    </CldUploadWidget>
-                  ) : (
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm text-green-600">Uploaded ✓</span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setProofUrl("");
-                          setValue("proof", undefined);
-                        }}
-                        className="text-red-600"
-                      >
-                        <Trash2Icon size={18} />
-                      </button>
-                    </div>
+                    <span className="text-sm">
+                      I hereby agree to post Zent video & tag official account
+                    </span>
+                  </label>
+                  {errors.agree_to_post_zent && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.agree_to_post_zent.message}
+                    </p>
+                  )}
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      style={{
+                        boxShadow: "0px 0px 4px 1px #4A62FF0F",
+                      }}
+                      {...register("agree_to_provide_engagement_proof")}
+                      className="accent-black w-4 h-4 mt-1 rounded border-gray-300 text-black focus:ring-black"
+                    />
+
+                    <span className="text-sm">
+                      I hereby agree to provide engagement proof
+                    </span>
+                  </label>
+                  {errors.agree_to_provide_engagement_proof && (
+                    <p className="text-sm text-red-500 mt-1">
+                      {errors.agree_to_provide_engagement_proof.message}
+                    </p>
                   )}
                 </div>
-              </div>
-              {/* Post Collaborations */}
-              <div>
-                <label
-                  htmlFor="past_collaborations_or_partnerships"
-                  className="block text-sm font-medium mb-2"
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full bg-black text-white flex items-center justify-center gap-2 py-3 font-semibold hover:bg-gray-900 transition-colors rounded-lg"
                 >
-                  Post collaborations or Partnerships{" "}
-                  <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  style={{
-                    boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                  }}
-                  {...register("past_collaborations_or_partnerships")}
-                  placeholder="Describe previous campaigns/brands worked with"
-                  rows={4}
-                  className="resize-none w-full px-4 py-3 placeholder:text-[#7D7D7D] border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                />
-                {errors.past_collaborations_or_partnerships && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.past_collaborations_or_partnerships.message}
-                  </p>
-                )}
-              </div>
-              {/* Agreement & Compliance */}
-              <div className="space-y-3">
-                <label className="block text-sm font-medium">
-                  Agreement & Compliance <span className="text-red-500">*</span>
-                </label>
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    style={{
-                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                    }}
-                    {...register("agree_to_post_zent")}
-                    className="accent-black w-4 h-4 mt-1 rounded border-gray-300 text-black focus:ring-black"
-                  />
-
-                  <span className="text-sm">
-                    I hereby agree to post Zent video & tag official account
-                  </span>
-                </label>
-                {errors.agree_to_post_zent && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.agree_to_post_zent.message}
-                  </p>
-                )}
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    style={{
-                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                    }}
-                    {...register("agree_to_provide_engagement_proof")}
-                    className="accent-black w-4 h-4 mt-1 rounded border-gray-300 text-black focus:ring-black"
-                  />
-
-                  <span className="text-sm">
-                    I hereby agree to provide engagement proof
-                  </span>
-                </label>
-                {errors.agree_to_provide_engagement_proof && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {errors.agree_to_provide_engagement_proof.message}
-                  </p>
-                )}
-              </div>
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-black text-white flex items-center justify-center gap-2 py-3 font-semibold hover:bg-gray-900 transition-colors rounded-lg"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={18} className="animate-spin" />
-                    <p>Submitting..</p>
-                  </>
-                ) : (
-                  "Submit"
-                )}
-              </button>
-            </form>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      <p>Submitting..</p>
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
