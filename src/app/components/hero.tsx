@@ -13,6 +13,7 @@ export function Hero() {
           src="/hero-blur.png"
           width={590}
           height={590}
+          draggable={false}
           alt="blur"
           className="relative top-52 w-[590px] h-[590px]"
         />
