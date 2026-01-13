@@ -62,6 +62,20 @@ export const applicationSchema = z.object({
   }),
 });
 
+const closeCloudinaryWidget = () => {
+  document.dispatchEvent(
+    new KeyboardEvent("keydown", {
+      key: "Escape",
+      code: "Escape",
+      keyCode: 27,
+      which: 27,
+      bubbles: true,
+    })
+  );
+
+  document.body.style.overflow = "";
+};
+
 export function ApplicationForm() {
   const [countryCodes, setCountryCodes] = useState<CountryCode[]>([]);
   const [proofUrl, setProofUrl] = useState<string>("");
@@ -424,6 +438,8 @@ export function ApplicationForm() {
                             setValue("proof", result.info.secure_url, {
                               shouldValidate: true,
                             });
+
+                            closeCloudinaryWidget();
                           }
                         }}
                         onError={() => {
