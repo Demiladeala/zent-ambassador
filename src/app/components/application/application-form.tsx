@@ -126,7 +126,7 @@ export function ApplicationForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        toast.error(result?.message || "Submission failed");
+        toast.error(result?.message || result?.email || "Submission failed");
         return;
       }
 
