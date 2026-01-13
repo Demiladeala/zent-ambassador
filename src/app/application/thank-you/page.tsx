@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ThankyouPage() {
   return (
-    <div className="flex flex-col items-center justify-center py-28 w-8/12 mx-auto text-center">
+    <div className="flex flex-col items-center justify-center py-28 w-[93%] md:w-8/12 mx-auto text-center">
       <h1 className="text-5xl font-bold mb-8">Thank You for Applying!</h1>
 
       <p className="text-lg mb-8 text-gray-700">
