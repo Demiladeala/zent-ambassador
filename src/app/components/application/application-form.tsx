@@ -13,6 +13,13 @@ import { useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
 import { Trash2Icon } from "lucide-react";
 
+const formatNumberWithCommas = (value: string | number) => {
+  if (!value) return "";
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const stripCommas = (value: string) => value.replace(/,/g, "");
+
 type ApplicationFormData = z.infer<typeof applicationSchema>;
 type CountryCode = {
   name: string;
@@ -117,6 +124,7 @@ export function ApplicationForm() {
       agree_to_provide_engagement_proof: false,
     },
   });
+  const communitySize = watch("community_size");
 
   const onSubmit = async (values: ApplicationFormData) => {
     const phone = `${values.countryCode}${values.phone}`;
@@ -257,7 +265,7 @@ export function ApplicationForm() {
                       <select
                         {...register("countryCode")}
                         // className="px-4 py-3 border-2 border-2 border-[#EEEBFC] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none pr-8"
-                        className="max-w-44 appearance-none px-4 py-3 border-2 rounded-lg bg-white"
+                        className="max-w-44 appearance-none pl-2 py-3 border-2 rounded-lg bg-white"
                       >
                         {countryCodes.map((c, index) => (
                           <option key={index} value={c.code}>
@@ -265,7 +273,7 @@ export function ApplicationForm() {
                           </option>
                         ))}
                       </select>
-                      <ChevronDown className="absolute right-2 top-3.5 w-4 h-4 pointer-events-none text-gray-600" />
+                      <ChevronDown className="absolute right-3 top-[18px] w-4 h-4 pointer-events-none text-gray-600" />
                     </div>
                     <input
                       style={{
@@ -293,11 +301,23 @@ export function ApplicationForm() {
                     <span className="text-red-500">*</span>
                   </label>
                   <input
-                    style={{
-                      boxShadow: "0px 0px 4px 1px #4A62FF0F",
-                    }}
-                    {...register("community_size")}
+                    type="text"
+                    inputMode="numeric"
                     placeholder="e.g 10,000"
+                    value={formatNumberWithCommas(communitySize || "")}
+                    onChange={(e) => {
+                      const rawValue = stripCommas(e.target.value);
+
+                      if (!/^\d*$/.test(rawValue)) return;
+
+                      setValue(
+                        "community_size",
+                        rawValue ? String(rawValue) : "",
+                        {
+                          shouldValidate: true,
+                        }
+                      );
+                    }}
                     className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
     ${
       errors.community_size
