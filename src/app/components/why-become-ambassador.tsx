@@ -56,13 +56,13 @@ export function WhyBecomeAmbassador() {
           Ambassador?
         </h1>
 
-        <div className="mt-6 lg:hidden max-w-[70%]">
+        {/* <div className="mt-6 lg:hidden max-w-[70%]">
           <p className="lg:text-xl text-[#484647]">
             Customers automatically receive notifications at every stage of
-            their order journey,from confirmation to delivery. No more endless
+            their order journey, from confirmation to delivery. No more endless
             status update messages.
           </p>
-        </div>
+        </div> */}
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

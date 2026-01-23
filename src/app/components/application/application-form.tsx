@@ -54,7 +54,7 @@ export const applicationSchema = z.object({
         /^\d+(\.\d{1,2})?$/.test(val.toString()),
       {
         message: "Engagement rate can have up to 2 decimal places",
-      }
+      },
     ),
 
   past_collaborations_or_partnerships: z
@@ -77,7 +77,7 @@ const closeCloudinaryWidget = () => {
       keyCode: 27,
       which: 27,
       bubbles: true,
-    })
+    }),
   );
 
   document.body.style.overflow = "";
@@ -90,7 +90,7 @@ export function ApplicationForm() {
   useEffect(() => {
     async function loadCodes() {
       const res = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,idd"
+        "https://restcountries.com/v3.1/all?fields=name,idd",
       );
       const data = await res.json();
 
@@ -131,7 +131,7 @@ export function ApplicationForm() {
 
     try {
       const response = await fetch(
-        "https://zent-backend-app-18c581b169a0.herokuapp.com/api/v1/ambassador/applications/submit/",
+        "https://api.zentstores.com/api/v1/ambassador/applications/submit/",
         {
           method: "POST",
           headers: {
@@ -142,7 +142,7 @@ export function ApplicationForm() {
             phone,
             proof: proofUrl || undefined,
           }),
-        }
+        },
       );
 
       const result = await response.json();
@@ -315,7 +315,7 @@ export function ApplicationForm() {
                         rawValue ? String(rawValue) : "",
                         {
                           shouldValidate: true,
-                        }
+                        },
                       );
                     }}
                     className={`w-full px-4 py-3 placeholder:text-[#7D7D7D] rounded-lg
@@ -383,9 +383,9 @@ export function ApplicationForm() {
                                 e.target.checked
                                   ? [...selected, platform.id]
                                   : selected.filter(
-                                      (p: string) => p !== platform.id
+                                      (p: string) => p !== platform.id,
                                     ),
-                                { shouldValidate: true }
+                                { shouldValidate: true },
                               );
                             }}
                           />
